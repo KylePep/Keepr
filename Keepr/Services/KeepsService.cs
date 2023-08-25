@@ -4,11 +4,16 @@ namespace Keepr.Services;
 public class KeepsService
 {
   private readonly KeepsRepository _keepsRepository;
+  private readonly VaultsService _vaultService;
+  private readonly VaultKeepsRepository _vaultKeepsRepository;
 
-  public KeepsService(KeepsRepository keepsRepository)
+  public KeepsService(VaultsService vaultService, VaultKeepsRepository vaultKeepsRepository, KeepsRepository keepsRepository)
   {
+    _vaultService = vaultService;
+    _vaultKeepsRepository = vaultKeepsRepository;
     _keepsRepository = keepsRepository;
   }
+
 
   internal Keep createKeep(Keep keepData)
   {
@@ -53,6 +58,13 @@ public class KeepsService
   internal List<Keep> getKeeps()
   {
     List<Keep> keeps = _keepsRepository.getKeeps();
+    return keeps;
+  }
+
+  internal List<KeepVaultKeep> getKeepsByVaultId(int vaultId, string userId)
+  {
+    _vaultService.getVaultById(vaultId, userId);
+    List<KeepVaultKeep> keeps = _vaultKeepsRepository.getKeepsByVaultId(vaultId);
     return keeps;
   }
 
