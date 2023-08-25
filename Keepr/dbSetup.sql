@@ -14,7 +14,7 @@ CREATE TABLE keeps(
   name VARCHAR(50) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   img VARCHAR(700) NOT NULL,
-  view INT NOT NULL,
+  views INT NOT NULL DEFAULT 0,
   creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
@@ -27,7 +27,7 @@ CREATE TABLE vaults(
   description VARCHAR(1000) NOT NULL,
   img VARCHAR(700) NOT NULL,
   isPrivate BOOLEAN DEFAULT false,
-    creatorId VARCHAR(255) NOT NULL,
+  creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
@@ -42,3 +42,19 @@ CREATE TABLE vaultKeeps(
   FOREIGN KEY(vaultId) REFERENCES vaults(id) ON DELETE CASCADE,
   FOREIGN KEY(keepId) REFERENCES keeps(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
+
+DROP TABLE keeps
+
+INSERT INTO keeps (name, description, img, creatorId)
+      VALUES ("Batman", 'Description of Batman', "Good image of Batman", '64e8e1e13d83d911ace899dd');
+      SELECT LAST_INSERT_ID()
+
+      UPDATE keeps
+      SET 
+      name = "Robin",
+      description = "Robins description",
+      img = "Image of Robin",
+      views = 0
+      WHERE id = 1
+
+      DELETE FROM keeps WHERE id = 2;
