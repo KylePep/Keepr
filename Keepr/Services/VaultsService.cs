@@ -21,6 +21,18 @@ public class VaultsService
     return vault;
   }
 
+  internal List<Vault> getAUsersVaults(string profileId)
+  {
+    List<Vault> vaults = _vaultRepository.getAUsersVaults(profileId);
+    return vaults;
+  }
+
+  internal List<Vault> getMyVaults(string userId)
+  {
+    List<Vault> vaults = _vaultRepository.getMyVaults(userId);
+    return vaults;
+  }
+
   internal Vault getVaultById(int vaultId, string userId = null)
   {
     Vault vault = _vaultRepository.getVaultById(vaultId);
@@ -38,6 +50,10 @@ public class VaultsService
   internal void removeVault(int vaultId, string userId)
   {
     Vault vault = getVaultById(vaultId, userId);
+    if (vault.CreatorId != userId)
+    {
+      throw new Exception($"Bad Request");
+    }
     _vaultRepository.removeVault(vaultId);
   }
 

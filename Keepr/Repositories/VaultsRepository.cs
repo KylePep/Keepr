@@ -16,13 +16,56 @@ public class VaultsRepository
   internal int createVault(Vault vaultData)
   {
     string sql = @"
-      INSERT INTO vaults (name, description, img, creatorId)
-      VALUES (@Name, @Description, @Img, @CreatorId);
+      INSERT INTO vaults (name, description, img, creatorId, isPrivate)
+      VALUES (@Name, @Description, @Img, @CreatorId, @isPrivate);
       SELECT LAST_INSERT_ID()
       ;";
 
     int vaultId = _db.ExecuteScalar<int>(sql, vaultData);
     return vaultId;
+  }
+
+  internal List<Vault> getAUsersVaults(string profileId)
+  {
+    string sql = @"
+      SELECT 
+      vt.*,
+      acc.*
+      FROM vaults vt
+      JOIN accounts acc ON acc.id = vt.creatorId
+      WHERE vt.creatorId = @profileId AND
+      vt.isPrivate = false;
+      ;";
+
+    List<Vault> vault = _db.Query<Vault, Profile, Vault>(
+      sql,
+      (vault, profile) =>
+      {
+        vault.Creator = profile;
+        return vault;
+      }, new { profileId }).ToList();
+    return vault;
+  }
+
+  internal List<Vault> getMyVaults(string userId)
+  {
+    string sql = @"
+      SELECT 
+      vt.*,
+      acc.*
+      FROM vaults vt
+      JOIN accounts acc ON acc.id = vt.creatorId
+      WHERE vt.creatorId = @userId
+      ;";
+
+    List<Vault> vault = _db.Query<Vault, Profile, Vault>(
+      sql,
+      (vault, profile) =>
+      {
+        vault.Creator = profile;
+        return vault;
+      }, new { userId }).ToList();
+    return vault;
   }
 
   internal Vault getVaultById(int vaultId)

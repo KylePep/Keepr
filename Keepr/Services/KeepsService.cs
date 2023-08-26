@@ -37,6 +37,12 @@ public class KeepsService
     return OriginalKeep;
   }
 
+  internal List<Keep> getAUsersKeeps(string profileId)
+  {
+    List<Keep> keeps = _keepsRepository.getAUsersKeeps(profileId);
+    return keeps;
+  }
+
   internal Keep getKeepById(int keepId)
   {
     Keep keep = _keepsRepository.getKeepById(keepId);

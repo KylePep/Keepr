@@ -16,6 +16,7 @@ CREATE TABLE keeps(
   img VARCHAR(700) NOT NULL,
   views INT NOT NULL DEFAULT 0,
   creatorId VARCHAR(255) NOT NULL,
+  kept INT NOT NULL DEFAULT 0,
   FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
 
@@ -44,6 +45,10 @@ CREATE TABLE vaultKeeps(
 ) default charset utf8 COMMENT '';
 
 DROP TABLE keeps
+
+DROP TABLE vaultKeeps
+
+DROP TABLE vaults
 
 INSERT INTO keeps (name, description, img, creatorId)
       VALUES ("Batman", 'Description of Batman', "Good image of Batman", '64e8e1e13d83d911ace899dd');
