@@ -20,10 +20,13 @@
               {{ keep.description }}
             </div>
             <div class="d-flex justify-content-between">
-              <div>
-                My Vaults Drop down
-                <button type="button" class="btn btn-primary">Save</button>
-              </div>
+              <form @submit.prevent="createVaultKeep()" class="form-group d-flex">
+                <label for="exampleFormControlSelect1"></label>
+                <select v-model="editable.vault" class="form-control" id="exampleFormControlSelect1">
+                  <option v-for="vault in vaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>
+                </select>
+                <button class="ms-3 btn btn-light">Save</button>
+              </form>
               <div>
                 <router-link :to="{ name: 'Profile', params: { profileId: keep.creator.id } }" @click="closeModal()">
                   <img class="avatar" :src="keep.creator.picture" :alt="keep.creator.name" :title="keep.creator.name">
@@ -42,15 +45,30 @@
 import { computed } from "vue";
 import { AppState } from "../AppState.js";
 import { Modal } from "bootstrap";
+import Pop from "../utils/Pop.js";
+import { vaultKeepsService } from "../services/VaultKeepsService.js"
 
 export default {
   setup() {
+    const editable = ({})
     return {
+      editable,
       AppState: computed(() => AppState),
       keep: computed(() => AppState.activeKeep),
+      vaults: computed(() => AppState.vaults),
       keepBg: computed(() => `url("${AppState.activeKeep.img}")`),
       closeModal() {
         Modal.getOrCreateInstance('#keepModal').hide()
+      },
+      async createVaultKeep() {
+        try {
+          const vaultKeepData = {}
+          vaultKeepData.vaultId = editable.vault
+          vaultKeepData.keepId = AppState.activeKeep.id
+          await vaultKeepsService.createVaultKeep(vaultKeepData)
+        } catch (error) {
+          Pop.error(error.message, '[ERROR-createVaultKeep]')
+        }
       }
     }
   }

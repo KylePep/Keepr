@@ -12,6 +12,7 @@ import Pop from "../utils/Pop.js";
 import { keepsService } from "../services/KeepsService.js"
 import { AppState } from "../AppState.js";
 import KeepCard from "../components/KeepCard.vue";
+import { accountService } from "../services/AccountService.js";
 
 export default {
   setup() {
@@ -23,12 +24,22 @@ export default {
         Pop.error(error.message, '[ERROR OCCURED - getKeeps]');
       }
     }
+    async function getAccountVaults(profileId) {
+      try {
+        await accountService.getAccountVaults();
+      }
+      catch (error) {
+        Pop.error(error.message, '[ERROR OCCURED- getVaultsByProfileId]');
+      }
+    }
     onMounted(() => {
       getKeeps();
+      getAccountVaults();
     });
     return {
       keeps: computed(() => AppState.keeps),
-      keepLength: computed(() => 36),
+      AppState: computed(() => AppState),
+
     };
   },
   components: { KeepCard }

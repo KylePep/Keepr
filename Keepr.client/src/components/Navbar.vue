@@ -1,14 +1,14 @@
 <template>
-  <nav class=" row navbar bg-dark px-3 justify-content-around ">
+  <nav class=" row navbar bg-light px-3 justify-content-around elevation-1">
     <div class="col-4 d-flex">
 
-      <router-link class="text-light d-flex" :to="{ name: 'Home' }">
+      <router-link class="text-dark d-flex fs-4" :to="{ name: 'Home' }">
         <div>
           Home
         </div>
       </router-link>
 
-      <div class=" dropdown-toggle ms-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <div class=" dropdown-toggle fs-4 ms-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Create
       </div>
       <ul class="dropdown-menu">
@@ -34,7 +34,7 @@
           </router-link> -->
 
 
-    <div class="col-4 d-flex justify-content-center">Keepr Icon</div>
+    <div class="col-4 d-flex justify-content-center fs-1">Keepr </div>
     <!-- LOGIN COMPONENT HERE -->
     <div class="col-4 d-flex justify-content-end">
       <Login />
@@ -72,7 +72,7 @@ a:hover {
 
 @media screen and (min-width: 768px) {
   nav {
-    height: 64px;
+    height: 72px;
   }
 }
 </style>

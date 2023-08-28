@@ -14,8 +14,8 @@
         </section>
       </div>
       <div class="col-12 d-flex">
-        <section v-if="keeps" class="row">
-          <div class="col-3  mb-3" v-for="keep in keeps" :key="keep.id">
+        <section v-if="keeps" class="masonry-with-columns">
+          <div class=" mb-3" v-for="keep in keeps" :key="keep.id">
             <KeepCard :keepProp="keep" />
           </div>
         </section>
@@ -79,5 +79,10 @@ export default {
 <style scoped>
 img {
   max-width: 100px;
+}
+
+.masonry-with-columns {
+  columns: 4 200px;
+  column-gap: 1rem;
 }
 </style>
