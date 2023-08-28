@@ -43,8 +43,8 @@ footer {
 }
 
 .avatar {
-  height: 6vh;
-  width: 6vh;
+  height: 50px;
+  width: 50px;
   background-size: cover;
   background-position: center;
   border-radius: 50%;

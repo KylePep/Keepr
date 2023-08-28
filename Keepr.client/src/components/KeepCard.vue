@@ -1,9 +1,9 @@
 <template>
-  <div class="card-bg position-relative rounded">
+  <div class=" position-relative rounded">
     <div>
       <div @click="getActiveKeepById(), setActiveProfile()" type="button" data-bs-toggle="modal"
         data-bs-target="#keepModal">
-        <img class="img-fluid img-reserve rounded" :src="keepProp.img" :alt="keepProp.name" :title="keepProp.name">
+        <img class="img-fluid rounded" :src="keepProp.img" :alt="keepProp.name" :title="keepProp.name">
       </div>
       <div class="keep-bar d-flex flex-grow-1 justify-content-between align-items-center px-3 py-1">
         <p class="fs-2">
@@ -50,25 +50,28 @@ export default {
 
 
 <style lang="scss" scoped>
-.img-reserve {
-  visibility: hidden;
+img {
+  object-fit: cover;
+  object-position: center;
+  max-height: 60vh;
+  width: 100%;
 }
 
 .keep-bar {
   color: white;
-  // position: absolute;
-  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.767));
+  position: absolute;
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.846));
   border-radius: 7px;
-  // bottom: 0%;
-  // left: 0%;
-
+  bottom: 0%;
+  right: 0%;
+  left: 0%;
 }
 
-.card-bg {
-  background-image: v-bind(keepBg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: fit-content;
-}
+// .card-bg {
+//   background-image: v-bind(keepBg);
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   height: fit-content;
+// }
 </style>

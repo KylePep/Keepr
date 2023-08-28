@@ -5,6 +5,7 @@
       {{ vault.name }}
       <img :src="vault.creator.picture" :alt="vault.creator.name">
       Keeps {{ keeps.length }}
+      {{ vault.description }}
     </div>
     <div v-if="keeps" class="col-3 d-flex">
       <div class="col-12  mb-3" v-for="keep in keeps" :key="keep.id">

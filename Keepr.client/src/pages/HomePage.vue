@@ -1,6 +1,6 @@
 <template>
-  <section class="row  mx-3">
-    <div class="col-3  mb-3" v-for="keep in keeps" :key="keep.id">
+  <section class=" masonry-with-columns  mx-3 pt-3">
+    <div class=" mb-3" v-for="keep in keeps" :key="keep.id">
       <KeepCard :keepProp="keep" />
     </div>
   </section>
@@ -27,7 +27,8 @@ export default {
       getKeeps();
     });
     return {
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      keepLength: computed(() => 36),
     };
   },
   components: { KeepCard }
@@ -35,23 +36,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-// .home {
-//   display: grid;
-//   height: 80vh;
-//   place-content: center;
-//   text-align: center;
-//   user-select: none;
-
-//   .home-card {
-//     width: 50vw;
-
-//     >img {
-//       height: 200px;
-//       max-width: 200px;
-//       width: 100%;
-//       object-fit: contain;
-//       object-position: center;
-//     }
-//   }
-// }
+.masonry-with-columns {
+  columns: 4 200px;
+  column-gap: 1rem;
+}
 </style>
