@@ -9,6 +9,8 @@
     Made with 💖 by CodeWorks
   </footer> -->
   <KeepModal />
+  <newKeepModal />
+  <newVaultModal />
 </template>
 
 <script>
@@ -38,5 +40,13 @@ footer {
   display: grid;
   place-content: center;
   height: 32px;
+}
+
+.avatar {
+  height: 6vh;
+  width: 6vh;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
 }
 </style>

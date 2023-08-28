@@ -8,9 +8,21 @@
         </div>
       </router-link>
 
-      <div>
+      <div class=" dropdown-toggle ms-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         Create
       </div>
+      <ul class="dropdown-menu">
+        <li>
+          <div class="ms-3" type="button" data-bs-toggle="modal" data-bs-target="#newKeepModal">
+            New Keep
+          </div>
+        </li>
+        <li>
+          <div class="ms-3" type="button" data-bs-toggle="modal" data-bs-target="#newVaultModal">
+            New Vault
+          </div>
+        </li>
+      </ul>
     </div>
     <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,10 +43,13 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import Login from './Login.vue';
 export default {
   setup() {
-    return {}
+    return {
+
+    }
   },
   components: { Login }
 }

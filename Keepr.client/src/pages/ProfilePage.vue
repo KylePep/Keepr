@@ -4,6 +4,7 @@
       <div class="col-12 mb-3">
         {{ activeProfile.name }}
         <img :src="activeProfile.picture" :alt="activeProfile.name">
+        Vaults {{ vaults.length }} | Keeps {{ keeps.length }}
       </div>
       <div v-if="vaults" class="col-12 d-flex">
         <section v-if="keeps" class="row">

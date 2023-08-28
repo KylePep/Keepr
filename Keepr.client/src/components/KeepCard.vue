@@ -1,7 +1,8 @@
 <template>
   <div class="card-bg position-relative rounded">
     <div>
-      <div type="button" data-bs-toggle="modal" data-bs-target="#keepModal">
+      <div @click="getActiveKeepById(), setActiveProfile()" type="button" data-bs-toggle="modal"
+        data-bs-target="#keepModal">
         <img class="img-fluid img-reserve rounded" :src="keepProp.img" :alt="keepProp.name" :title="keepProp.name">
       </div>
       <div class="keep-bar d-flex flex-grow-1 justify-content-between align-items-center px-3 py-1">
@@ -22,6 +23,8 @@
 import { computed } from "vue";
 import { Keep } from "../models/Keep.js";
 import { AppState } from "../AppState.js";
+import Pop from "../utils/Pop.js";
+import { keepsService } from "../services/KeepsService.js";
 
 export default {
   props: {
@@ -32,6 +35,13 @@ export default {
       keepBg: computed(() => `url("${props.keepProp.img}")`),
       setActiveProfile() {
         AppState.activeProfile = props.keepProp.creator
+      },
+      async getActiveKeepById() {
+        try {
+          await keepsService.getActiveKeepById(props.keepProp.id)
+        } catch (error) {
+          Pop.error(error.message, '[ERROR - getActiveKeepById]')
+        }
       }
     }
   }
@@ -60,13 +70,5 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   height: fit-content;
-}
-
-.avatar {
-  height: 6vh;
-  width: 6vh;
-  background-size: cover;
-  background-position: center;
-  border-radius: 50%;
 }
 </style>
