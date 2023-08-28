@@ -47,6 +47,7 @@ public class KeepsRepository
       FROM keeps kp
       JOIN accounts acc ON acc.id = kp.creatorId
       WHERE kp.creatorId = @profileId
+      ORDER BY kp.createdAt DESC
       ;";
     List<Keep> keeps = _db.Query<Keep, Profile, Keep>(
       sql,

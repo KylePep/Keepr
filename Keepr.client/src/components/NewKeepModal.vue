@@ -13,15 +13,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="" action="">
-            <input class="form-control" type="text" name="title" id="title" placeholder="Title" required>
-            <input class="form-control" type="text" name="url" id="url" placeholder="URL" required>
-            <textarea class="form-control" name="description" id="description" cols="60" rows="10" required></textarea>
-
+          <form @submit.prevent="createKeep()">
+            <input v-model="editable.name" class="form-control" type="text" name="name" id="name" placeholder="Title"
+              required>
+            <input v-model="editable.img" class="form-control" type="text" name="img" id="img" placeholder="URL" required>
+            <textarea v-model="editable.description" class="form-control" name="description" id="description" cols="60"
+              rows="10" required></textarea>
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Create</button>
         </div>
       </div>
     </div>
@@ -30,9 +31,27 @@
 
 
 <script>
+import { ref } from "vue";
+import Pop from "../utils/Pop.js";
+import { keepsService } from "../services/KeepsService.js";
+import { Modal } from "bootstrap";
+
 export default {
   setup() {
-    return {}
+    const editable = ref({})
+    return {
+      editable,
+      async createKeep() {
+        try {
+          const keepData = editable.value
+          await keepsService.createKeep(keepData)
+          editable.value = {}
+          Modal.getOrCreateInstance('#newKeepModal').hide()
+        } catch (error) {
+          Pop.error(error.message, '[ERROR - createKeep]')
+        }
+      }
+    }
   }
 }
 </script>

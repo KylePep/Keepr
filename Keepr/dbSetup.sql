@@ -27,7 +27,7 @@ CREATE TABLE vaults(
   name VARCHAR(50) NOT NULL,
   description VARCHAR(1000) NOT NULL,
   img VARCHAR(700) NOT NULL,
-  isPrivate BOOLEAN DEFAULT false,
+  isPrivate BOOLEAN NOT NULL DEFAULT 0,
   creatorId VARCHAR(255) NOT NULL,
   FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';

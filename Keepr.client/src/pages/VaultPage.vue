@@ -4,6 +4,7 @@
     <div class="col-12" v-if="AppState.activeVault.id">
       {{ vault.name }}
       <img :src="vault.creator.picture" :alt="vault.creator.name">
+      Keeps {{ keeps.length }}
     </div>
     <div v-if="keeps" class="col-3 d-flex">
       <div class="col-12  mb-3" v-for="keep in keeps" :key="keep.id">

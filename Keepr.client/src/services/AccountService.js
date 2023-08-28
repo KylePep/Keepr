@@ -30,6 +30,11 @@ class AccountService {
     const keeps = res.data.map(v => new Keep(v))
     AppState.keeps = keeps
   }
+  async getAccountVaults() {
+    const res = await api.get(`/account/vaults`)
+    const vaults = res.data.map(v => new Vault(v))
+    AppState.vaults = vaults
+  }
 }
 
 export const accountService = new AccountService()
