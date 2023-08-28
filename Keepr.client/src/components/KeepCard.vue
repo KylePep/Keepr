@@ -8,7 +8,7 @@
         <p class="fs-2">
           {{ keepProp.name }}
         </p>
-        <router-link :to="{ name: 'About' }">
+        <router-link @click="setActiveProfile()" :to="{ name: 'Profile', params: { profileId: keepProp.creator.id } }">
           <img class="img-fluid avatar " :src="keepProp.creator.picture" :alt="keepProp.creator.name"
             :title="keepProp.creator.name">
         </router-link>
@@ -21,6 +21,7 @@
 <script>
 import { computed } from "vue";
 import { Keep } from "../models/Keep.js";
+import { AppState } from "../AppState.js";
 
 export default {
   props: {
@@ -28,7 +29,10 @@ export default {
   },
   setup(props) {
     return {
-      keepBg: computed(() => `url("${props.keepProp.img}")`)
+      keepBg: computed(() => `url("${props.keepProp.img}")`),
+      setActiveProfile() {
+        AppState.activeProfile = props.keepProp.creator
+      }
     }
   }
 }
