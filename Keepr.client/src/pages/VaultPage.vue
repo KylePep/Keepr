@@ -28,7 +28,7 @@
         </div>
       </section>
     </div>
-    <div v-if="keeps" class="masonry-with-columns mt-3">
+    <div v-if="keeps" class="keep-Section masonry-with-columns mt-3">
       <div class="  mb-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keepProp="keep" />
       </div>
@@ -107,10 +107,5 @@ export default {
   border-radius: 7px;
   // bottom: 0%;
   // left: 0%;
-}
-
-.masonry-with-columns {
-  columns: 4 200px;
-  column-gap: 1rem;
 }
 </style>

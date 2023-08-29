@@ -5,9 +5,9 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="container-fluid  modal-content p-0">
         <div v-if="keep.id" class="row modal-body p-0 m-0">
-          <div class="col-6 card-bg content p-0 m-0">
+          <div class="col-12 col-md-6 card-bg content p-0 m-0">
           </div>
-          <div class="col-6 d-flex flex-column justify-content-between p-4">
+          <div class="col-12 col-md-6 d-flex flex-column justify-content-between p-4">
             <div class="text-center">
               <i class="mdi mdi-eye"></i> {{ keep.views }} | <i class="kept">K</i> {{ keep.kept }}
             </div>
@@ -128,6 +128,12 @@ export default {
 }
 
 .content {
-  height: 80vh;
+  height: 70vh;
+}
+
+@media screen and (min-width: 768px) {
+  .content {
+    height: 80vh;
+  }
 }
 </style>

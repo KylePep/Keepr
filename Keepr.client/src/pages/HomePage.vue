@@ -1,5 +1,5 @@
 <template>
-  <section class=" masonry-with-columns  mx-3 pt-3">
+  <section class="keep-Section masonry-with-columns  mx-3 pt-3">
     <div class=" mb-3" v-for="keep in keeps" :key="keep.id">
       <KeepCard :keepProp="keep" />
     </div>
@@ -57,9 +57,4 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-.masonry-with-columns {
-  columns: 4 200px;
-  column-gap: 1rem;
-}
-</style>
+<style scoped lang="scss"></style>

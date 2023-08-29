@@ -17,5 +17,6 @@ export const AppState = reactive({
   vaults: [],
   /** @type {import('./models/Vault.js').Vault{}} */
   activeVault: {},
-  edit: false
+  edit: false,
+  screenWidth: 0
 })

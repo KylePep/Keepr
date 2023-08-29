@@ -19,16 +19,20 @@
         </div>
       </div>
       <!-- NOTE removed d-flex -->
-      <div v-if="vaults" class="col-12">
+      <div v-if="vaults" class="col-12 fs-1">
         <!-- NOTE removed v-if keeps -->
+        Vaults
         <section class="row">
-          <div class="col-2 mb-3" v-for="vault in vaults" :key="vault.id">
+          <div class="col-6 col-md-2 mb-3" v-for="vault in vaults" :key="vault.id">
             <VaultCard :vaultProp="vault" />
           </div>
         </section>
       </div>
+      <p class="fs-1">
+        Keeps
+      </p>
       <div class="col-12 d-flex">
-        <section v-if="keeps" class="masonry-with-columns">
+        <section v-if="keeps" class="keep-Section masonry-with-columns">
           <div class=" mb-3" v-for="keep in keeps" :key="keep.id">
             <KeepCard :keepProp="keep" />
           </div>
@@ -84,6 +88,7 @@ export default {
     onUnmounted(() => {
       AppState.vaults = []
       AppState.keeps = []
+      AppState.activeProfile = {}
     })
     return {
       AppState: computed(() => AppState),
@@ -107,22 +112,5 @@ img {
   background-position: center;
   background-size: cover;
   background-image: v-bind(coverImg);
-}
-
-.masonry-with-columns {
-  columns: 4 200px;
-  column-gap: 1rem;
-}
-
-.profile-avatar {
-  position: absolute;
-  bottom: -25%;
-  left: 43.5%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  height: 20vh;
-  min-width: 20vh;
-  max-width: 20vh;
 }
 </style>
