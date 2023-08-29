@@ -9,18 +9,19 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="accountFormModal">Add your keep</h1>
+          <h1 class="modal-title fs-5" id="accountFormModal">Edit your account</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="createKeep()">
-            <input v-model="editable.name" class="form-control" type="text" name="name" id="name" placeholder="Title"
+          <form @submit.prevent="editAccount()">
+            <input v-model="editable.name" class="form-control" type="text" name="name" id="name" placeholder="Name..."
               required>
-            <input v-model="editable.img" class="form-control" type="text" name="img" id="img" placeholder="URL" required>
-            <textarea v-model="editable.description" class="form-control" name="description" id="description" cols="60"
-              rows="10" required></textarea>
+            <input v-model="editable.picture" class="form-control" type="text" name="picture" id="picture"
+              placeholder="Picture..." required>
+            <input v-model="editable.coverImg" class="form-control" type="text" name="coverImg" id="icoverImgmg"
+              placeholder="Cover Image..." required>
             <div class="d-flex justify-content-end">
-              <button type="submit" class="btn btn-primary">Create</button>
+              <button type="submit" class="btn btn-primary">Update</button>
             </div>
           </form>
         </div>
@@ -31,14 +32,19 @@
 
 
 <script>
-import { ref } from "vue"
+import { ref, watchEffect } from "vue"
 import { accountService } from "../services/AccountService.js"
 import { Modal } from "bootstrap"
 import Pop from "../utils/Pop.js"
+import { AppState } from "../AppState.js"
 
 export default {
   setup() {
     const editable = ref({})
+    watchEffect(() => {
+      AppState.account
+      editable.value = { ...AppState.account }
+    })
     return {
       editable,
       async editAccount() {

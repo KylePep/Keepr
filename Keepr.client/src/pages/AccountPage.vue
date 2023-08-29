@@ -7,7 +7,7 @@
             <img class="profile-avatar" :src="activeProfile.picture" :alt="activeProfile.name">
           </div>
           <div @click="setEdit()" class="ms-3 fs-4 col-9 d-flex justify-content-end" type="button" data-bs-toggle="modal"
-            data-bs-target="#newVaultModal">
+            data-bs-target="#accountFormModal">
             <i class="mdi mdi-dots-horizontal p-0  selectable"></i>
           </div>
         </section>
@@ -36,6 +36,7 @@
       </div>
     </section>
   </div>
+  <AccountForm />
 </template>
 
 <script>
@@ -46,6 +47,7 @@ import { accountService } from "../services/AccountService.js";
 import Pop from "../utils/Pop.js";
 import KeepCard from "../components/KeepCard.vue";
 import VaultCard from "../components/VaultCard.vue";
+import AccountForm from "../components/AccountForm.vue";
 export default {
   setup() {
     const route = useRoute();
@@ -87,10 +89,11 @@ export default {
       AppState: computed(() => AppState),
       activeProfile: computed(() => AppState.activeProfile),
       vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      coverImg: computed(() => `url("${AppState.account.coverImg}")`),
     };
   },
-  components: { KeepCard, VaultCard }
+  components: { KeepCard, VaultCard, AccountForm }
 }
 </script>
 
@@ -103,7 +106,7 @@ img {
   height: 25vh;
   background-position: center;
   background-size: cover;
-  background-image: url(https://plus.unsplash.com/premium_photo-1668017178993-4c8fc9f59872?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80);
+  background-image: v-bind(coverImg);
 }
 
 .masonry-with-columns {
