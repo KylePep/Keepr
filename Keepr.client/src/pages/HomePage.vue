@@ -4,7 +4,6 @@
       <KeepCard :keepProp="keep" />
     </div>
   </section>
-  <KeepModal />
 </template>
 
 <script>
@@ -14,7 +13,6 @@ import { keepsService } from "../services/KeepsService.js"
 import { AppState } from "../AppState.js";
 import KeepCard from "../components/KeepCard.vue";
 import { accountService } from "../services/AccountService.js";
-import KeepModal from "../components/KeepModal.vue";
 
 
 export default {
@@ -51,7 +49,7 @@ export default {
 
     };
   },
-  components: { KeepCard, KeepModal }
+  components: { KeepCard }
 }
 </script>
 

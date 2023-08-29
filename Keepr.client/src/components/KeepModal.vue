@@ -18,13 +18,22 @@
               {{ keep.description }}
             </div>
             <div class="d-flex justify-content-between">
-              <form v-if="AppState.account.id" @submit.prevent="createVaultKeep()" class="form-group d-flex">
-                <label for="exampleFormControlSelect1"></label>
-                <select v-model="editable.vault" class="form-control" id="exampleFormControlSelect1">
-                  <option v-for="vault in vaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>
-                </select>
-                <button class="ms-3 btn btn-light">Save</button>
-              </form>
+              <div v-if="route.name != 'Vault'">
+                <form v-if="AppState.account.id" @submit.prevent="createVaultKeep()" class="form-group d-flex">
+                  <label for="exampleFormControlSelect1"></label>
+                  <select v-model="editable.vault" class="form-control" id="exampleFormControlSelect1">
+                    <option v-for=" vault  in  vaults " :key="vault.id" :value="vault.id">{{ vault.name }}</option>
+                  </select>
+                  <button class="ms-3 btn btn-light">Save</button>
+                </form>
+              </div>
+              <!-- <div @click="removeKeep()" v-if="route.name == 'Profile' || route.name == 'Account'"
+                class="selectable fs-4">
+                <i class="mdi mdi-cancel"></i> Remove Keep
+              </div> -->
+              <div @click="removeVaultKeep()" v-if="route.name == 'Vault'" class="selectable fs-4">
+                <i class="mdi mdi-cancel"></i>Remove Keep From Vault
+              </div>
               <div v-else></div>
               <div>
                 <router-link :to="{ name: 'Profile', params: { profileId: keep.creator.id } }" @click="closeModal()">
@@ -47,12 +56,19 @@ import { AppState } from "../AppState.js";
 import { Modal } from "bootstrap";
 import Pop from "../utils/Pop.js";
 import { vaultKeepsService } from "../services/VaultKeepsService.js"
+import { useRoute, useRouter } from "vue-router";
+import { keepsService } from "../services/KeepsService.js";
 
 export default {
   setup() {
+    const route = useRoute()
     const editable = ({})
+    // watchEffect(() => {
+    //   route.name
+    // })
     return {
       editable,
+      route,
       AppState: computed(() => AppState),
       keep: computed(() => AppState.activeKeep),
       vaults: computed(() => AppState.vaults),
@@ -68,6 +84,21 @@ export default {
           await vaultKeepsService.createVaultKeep(vaultKeepData)
         } catch (error) {
           Pop.error(error.message, '[ERROR-createVaultKeep]')
+        }
+      },
+      async removeVaultKeep() {
+        try {
+          await vaultKeepsService.removeVaultKeep()
+        } catch (error) {
+          Pop.error(error.message, '[ERROR-removeVaultKeep]')
+        }
+      },
+      async removeKeep() {
+        try {
+          await keepsService.removeKeep(AppState.activeKeep.id)
+          this.closeModal()
+        } catch (error) {
+          Pop.error(error.message, '[ERROR-removeKeep]')
         }
       }
     }

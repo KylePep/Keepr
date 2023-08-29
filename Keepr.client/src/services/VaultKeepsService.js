@@ -6,5 +6,6 @@ class VaultKeepsService {
     await api.post('api/vaultkeeps', vaultKeepData)
     Pop.success(`Keep has been added to your vault`)
   }
+  async removeVaultKeep() { }
 }
 export const vaultKeepsService = new VaultKeepsService()
