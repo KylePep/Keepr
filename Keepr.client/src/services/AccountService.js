@@ -33,6 +33,11 @@ class AccountService {
     const vaults = res.data.map(v => new Vault(v))
     AppState.vaults = vaults
   }
+  async editAccount() {
+    const res = await api.put(`/account`)
+    const account = new Account(res.data)
+    AppState.account = account
+  }
 }
 
 export const accountService = new AccountService()

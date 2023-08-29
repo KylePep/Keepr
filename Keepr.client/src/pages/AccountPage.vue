@@ -2,9 +2,21 @@
   <div class="container-fluid">
     <section class="row">
       <div class="col-12 mb-3">
-        {{ activeProfile.name }}
-        <img :src="activeProfile.picture" :alt="activeProfile.name">
-        Vaults {{ vaults.length }} | Keeps {{ keeps.length }}
+        <section class="row d-flex justify-content-center">
+          <div class="col-9 cover-img position-relative m-3 rounded">
+            <img class="profile-avatar" :src="activeProfile.picture" :alt="activeProfile.name">
+          </div>
+          <div @click="setEdit()" class="ms-3 fs-4 col-9 d-flex justify-content-end" type="button" data-bs-toggle="modal"
+            data-bs-target="#newVaultModal">
+            <i class="mdi mdi-dots-horizontal p-0  selectable"></i>
+          </div>
+        </section>
+        <div class="text-center fs-3">
+          {{ activeProfile.name }}
+          <p class="fs-5">
+            Vaults {{ vaults.length }} | Keeps {{ keeps.length }}
+          </p>
+        </div>
       </div>
       <!-- NOTE removed d-flex -->
       <div v-if="vaults" class="col-12">
@@ -87,8 +99,27 @@ img {
   max-width: 100px;
 }
 
+.cover-img {
+  height: 25vh;
+  background-position: center;
+  background-size: cover;
+  background-image: url(https://plus.unsplash.com/premium_photo-1668017178993-4c8fc9f59872?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80);
+}
+
 .masonry-with-columns {
   columns: 4 200px;
   column-gap: 1rem;
+}
+
+.profile-avatar {
+  position: absolute;
+  bottom: -25%;
+  left: 43.5%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  height: 20vh;
+  min-width: 20vh;
+  max-width: 20vh;
 }
 </style>
