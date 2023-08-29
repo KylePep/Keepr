@@ -1,6 +1,6 @@
 <template>
   <div class="col-12">
-    <section class=" keep-Section masonry-with-columns  px-3 pt-3">
+    <section class=" keep-Section masonry-with-columns  px-1 pt-3">
       <div class=" mb-3" v-for="keep in keeps" :key="keep.id">
         <KeepCard :keepProp="keep" />
       </div>

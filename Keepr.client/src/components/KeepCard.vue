@@ -5,12 +5,13 @@
         data-bs-target="#keepModal">
         <img class="img-fluid rounded" :src="keepProp.img" :alt="keepProp.name" :title="keepProp.name">
       </div>
-      <div class="keep-bar d-flex flex-grow-1 justify-content-between align-items-center px-3 py-1">
+      <div class="keep-bar d-flex flex-grow-1 justify-content-between align-items-end px-3 py-md-1">
         <p class="fs-2 fw-bold">
           {{ keepProp.name }}
         </p>
-        <router-link @click="setActiveProfile()" :to="{ name: 'Profile', params: { profileId: keepProp.creator.id } }">
-          <img class="img-fluid avatar " :src="keepProp.creator.picture" :alt="keepProp.creator.name"
+        <router-link @click="setActiveProfile()" class="d-none d-md-block"
+          :to="{ name: 'Profile', params: { profileId: keepProp.creator.id } }">
+          <img class="img-fluid avatar mb-3" :src="keepProp.creator.picture" :alt="keepProp.creator.name"
             :title="keepProp.creator.name">
         </router-link>
       </div>
@@ -84,6 +85,10 @@ img {
   left: 0%;
 }
 
+.keep-card {
+  min-height: 15vh;
+}
+
 .keep-card:hover .delete-button {
   display: block;
 }
@@ -108,6 +113,10 @@ img {
     top: 0%;
     right: 0%;
     display: none;
+  }
+
+  .keep-card {
+    min-height: 15vh;
   }
 }
 </style>
