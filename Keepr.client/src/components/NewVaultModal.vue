@@ -9,11 +9,18 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="newVaultModal"> Add your vault </h1>
+          <h1 class="modal-title fs-5" id="newVaultModal">
+            <p v-if="edit == false">
+              Add your Vault
+            </p>
+            <p v-else>
+              Edit your Vault
+            </p>
+          </h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form @submit.prevent="createVault()">
+          <form v-if="edit == false" @submit.prevent="createVault()">
             <input v-model="editable.name" class="form-control" type="text" name="title" id="title" placeholder="Title"
               required>
             <input v-model="editable.description" class="form-control" type="text" name="description" id="description"
@@ -31,6 +38,22 @@
               <button type="submit" class="btn btn-primary">Create Vault</button>
             </div>
           </form>
+          <form v-else @submit.prevent="editVault()" action="">
+            <input v-model="updateable.name" class="form-control" type="text" name="title" id="title" placeholder="Title">
+            <input v-model="updateable.description" class="form-control" type="text" name="description" id="description"
+              placeholder="Description">
+            <input v-model="updateable.img" class="form-control" type="text" name="url" id="url" placeholder="URL">
+            <div class="d-flex justify-content-between">
+              <i @click="changePrivacy()" class="mdi mdi-rotate-3d-variant btn btn-primary d-flex">
+                <p v-if="vault.isPrivate">Private</p>
+                <p v-else>Public</p>
+              </i>
+              <button type="submit" class="btn btn-primary">
+                <p v-if="edit == false">Create Vault</p>
+                <p v-else>Edit Vault</p>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -39,17 +62,26 @@
 
 
 <script>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref, watchEffect } from "vue";
 import Pop from "../utils/Pop.js";
 import { vaultsService } from "../services/VaultsService.js";
 import { Modal } from "bootstrap";
+import { AppState } from "../AppState.js";
 
 export default {
   setup() {
     const editable = ref({})
+    const updateable = ref({})
     onMounted(() => editable.value.isPrivate = false)
+    watchEffect(() => {
+      AppState.activeVault
+      updateable.value = { ...AppState.activeVault }
+    })
     return {
       editable,
+      updateable,
+      edit: computed(() => AppState.edit),
+      vault: computed(() => AppState.activeVault),
       async createVault() {
         try {
           const vaultData = editable.value
@@ -62,6 +94,26 @@ export default {
         } catch (error) {
           Pop.error(error.message, '[ERROR- createVault]')
         }
+      },
+      async editVault() {
+        try {
+          const vaultData = updateable.value
+          await vaultsService.editVault(vaultData)
+          editable.value = {}
+          AppState.edit = false
+          Modal.getOrCreateInstance('#newVaultModal').hide()
+        } catch (error) {
+          Pop.error(error.message, '[ERROR- editVault]')
+        }
+      },
+      async changePrivacy() {
+        try {
+          const vaultData = AppState.activeVault
+          vaultData.isPrivate = !AppState.activeVault.isPrivate
+          await vaultsService.changePrivacy(vaultData)
+        } catch (error) {
+          Pop.error(error.message, '[ERROR- changePrivacy]')
+        }
       }
     }
   }
@@ -69,4 +121,9 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+p {
+  padding: 0;
+  margin: 0;
+}
+</style>

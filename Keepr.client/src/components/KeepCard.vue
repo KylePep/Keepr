@@ -38,6 +38,7 @@ export default {
       },
       async getActiveKeepById() {
         try {
+          AppState.activeKeep = props.keepProp
           await keepsService.getActiveKeepById(props.keepProp.id)
         } catch (error) {
           Pop.error(error.message, '[ERROR - getActiveKeepById]')

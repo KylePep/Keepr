@@ -1,10 +1,12 @@
 <template>
   <router-link @click="setActiveVault(), emptyKeeps()" :to="{ name: 'Vault', params: { vaultId: vaultProp.id } }">
     <div class="card-bg position-relative rounded d-flex align-items-end">
-      <div class="keep-bar d-flex flex-grow-1  px-3 py-1">
+      <div class="keep-bar d-flex flex-grow-1 align-items-center justify-content-between px-3 py-1">
+
         <p class="fs-2">
           {{ vaultProp.name }}
         </p>
+        <p v-if="vaultProp.isPrivate == true" class="mdi mdi-lock"></p>
       </div>
     </div>
   </router-link>
@@ -48,7 +50,6 @@ export default {
   border-radius: 7px;
   // bottom: 0%;
   // left: 0%;
-
 }
 
 .card-bg {

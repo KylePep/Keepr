@@ -13,12 +13,12 @@
       </div>
       <ul class="dropdown-menu">
         <li>
-          <div class="ms-3" type="button" data-bs-toggle="modal" data-bs-target="#newKeepModal">
+          <div class="ms-3 fs-4" type="button" data-bs-toggle="modal" data-bs-target="#newKeepModal">
             New Keep
           </div>
         </li>
         <li>
-          <div class="ms-3" type="button" data-bs-toggle="modal" data-bs-target="#newVaultModal">
+          <div class="ms-3 fs-4" type="button" data-bs-toggle="modal" data-bs-target="#newVaultModal">
             New Vault
           </div>
         </li>
@@ -72,7 +72,7 @@ a:hover {
 
 @media screen and (min-width: 768px) {
   nav {
-    height: 72px;
+    height: 102px;
   }
 }
 </style>

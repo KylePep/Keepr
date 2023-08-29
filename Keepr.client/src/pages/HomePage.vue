@@ -4,29 +4,34 @@
       <KeepCard :keepProp="keep" />
     </div>
   </section>
+  <KeepModal />
 </template>
 
 <script>
-import { computed, onMounted } from "vue";
+import { computed, onMounted, watchEffect } from "vue";
 import Pop from "../utils/Pop.js";
 import { keepsService } from "../services/KeepsService.js"
 import { AppState } from "../AppState.js";
 import KeepCard from "../components/KeepCard.vue";
 import { accountService } from "../services/AccountService.js";
+import KeepModal from "../components/KeepModal.vue";
+
 
 export default {
   setup() {
     async function getKeeps() {
       try {
-        const keeps = await keepsService.getKeeps();
+        await keepsService.getKeeps();
       }
       catch (error) {
         Pop.error(error.message, '[ERROR OCCURED - getKeeps]');
       }
     }
-    async function getAccountVaults(profileId) {
+    async function getAccountVaults() {
       try {
-        await accountService.getAccountVaults();
+        if (AppState.account.id) {
+          await accountService.getAccountVaults();
+        }
       }
       catch (error) {
         Pop.error(error.message, '[ERROR OCCURED- getVaultsByProfileId]');
@@ -36,13 +41,17 @@ export default {
       getKeeps();
       getAccountVaults();
     });
+    watchEffect(() => {
+      AppState.account.id
+      getAccountVaults();
+    })
     return {
       keeps: computed(() => AppState.keeps),
       AppState: computed(() => AppState),
 
     };
   },
-  components: { KeepCard }
+  components: { KeepCard, KeepModal }
 }
 </script>
 

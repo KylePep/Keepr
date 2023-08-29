@@ -1,4 +1,5 @@
 import { reactive } from 'vue'
+import { extractIdentifiers } from "vue/compiler-sfc"
 
 // NOTE AppState is a reactive object to contain app level data
 export const AppState = reactive({
@@ -15,5 +16,6 @@ export const AppState = reactive({
   /** @type {import('./models/Vault.js').Vault[]} */
   vaults: [],
   /** @type {import('./models/Vault.js').Vault{}} */
-  activeVault: {}
+  activeVault: {},
+  edit: false
 })
