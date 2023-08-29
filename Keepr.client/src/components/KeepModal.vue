@@ -88,7 +88,12 @@ export default {
       },
       async removeVaultKeep() {
         try {
-          await vaultKeepsService.removeVaultKeep()
+          const removeConfrim = await Pop.confirm(`Remove this Keep from your vault? ${AppState.activeKeep.name}`)
+          if (!removeConfrim) {
+            return
+          }
+          await vaultKeepsService.removeVaultKeep(AppState.activeKeep.vaultKeepId)
+          this.closeModal()
         } catch (error) {
           Pop.error(error.message, '[ERROR-removeVaultKeep]')
         }

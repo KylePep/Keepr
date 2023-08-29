@@ -1,10 +1,9 @@
 <template>
   <div class="container-fluid">
 
-    <div class="col-12 " v-if="AppState.activeVault.id">
+    <div class="col-12 " v-if="vault?.id">
       <section class="row d-flex justify-content-center">
         <div class="col-7 vault-bg d-flex justify-content-center align-items-end p-0 mx-5 mt-5 rounded fs-3 text-light">
-          <!-- <img :src="vault.creator.picture" :alt="vault.creator.name"> -->
 
           <div class="d-flex flex-column keep-bar p-3 flex-grow-1">
             <p class="text-center fs-1 fw-bold">
@@ -42,7 +41,7 @@
 import { useRoute } from "vue-router";
 import { vaultsService } from "../services/VaultsService.js";
 import Pop from "../utils/Pop.js";
-import { computed, watchEffect } from "vue";
+import { computed, onUnmounted, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import { keepsService } from "../services/KeepsService.js";
 
@@ -67,12 +66,15 @@ export default {
       getVaultById(route.params.vaultId)
       getKeepsByVaultId(route.params.vaultId)
     })
+    onUnmounted(() => {
+      AppState.activeVault = {}
+    })
     return {
       AppState: computed(() => AppState),
       keeps: computed(() => AppState.keeps),
       vault: computed(() => AppState.activeVault),
       vaultBg: computed(() => `url("${AppState.activeVault.img}")`),
-      accountId: computed(() => AppState.account.id),
+      accountId: computed(() => AppState.account?.id),
       setEdit() {
         AppState.edit = true
       }

@@ -1,5 +1,5 @@
 <template>
-  <div class=" position-relative rounded">
+  <div class="keep-card position-relative rounded">
     <div>
       <div @click="getActiveKeepById(), setActiveProfile()" type="button" data-bs-toggle="modal"
         data-bs-target="#keepModal">
@@ -13,6 +13,9 @@
           <img class="img-fluid avatar " :src="keepProp.creator.picture" :alt="keepProp.creator.name"
             :title="keepProp.creator.name">
         </router-link>
+      </div>
+      <div @click="removeKeep()" v-if="AppState.account?.id == keepProp.creator.id"
+        class="mdi mdi-close-circle text-danger fs-2 delete-button" title="Delete Keep">
       </div>
     </div>
   </div>
@@ -36,12 +39,25 @@ export default {
       setActiveProfile() {
         AppState.activeProfile = props.keepProp.creator
       },
+      AppState: computed(() => AppState),
       async getActiveKeepById() {
         try {
           AppState.activeKeep = props.keepProp
           await keepsService.getActiveKeepById(props.keepProp.id)
+          AppState.activeKeep.vaultKeepId = props.keepProp.vaultKeepId
         } catch (error) {
           Pop.error(error.message, '[ERROR - getActiveKeepById]')
+        }
+      },
+      async removeKeep() {
+        try {
+          const removeConfrim = await Pop.confirm(`Delete this keep? ${props.keepProp.name}, This can not be reveresed`)
+          if (!removeConfrim) {
+            return
+          }
+          await keepsService.removeKeep(props.keepProp.id)
+        } catch (error) {
+          Pop.error(error.message, '[ERROR- removeKeep]')
         }
       }
     }
@@ -68,11 +84,20 @@ img {
   left: 0%;
 }
 
-// .card-bg {
-//   background-image: v-bind(keepBg);
-//   background-position: center;
-//   background-repeat: no-repeat;
-//   background-size: cover;
-//   height: fit-content;
-// }
+.keep-card:hover .delete-button {
+  display: block;
+}
+
+.delete-button {
+  padding-right: .2em;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  display: none;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  scale: 1.1;
+}
 </style>

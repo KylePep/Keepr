@@ -6,8 +6,10 @@
         <img :src="activeProfile.picture" :alt="activeProfile.name">
         Vaults {{ vaults.length }} | Keeps {{ keeps.length }}
       </div>
-      <div v-if="vaults" class="col-12 d-flex">
-        <section v-if="keeps" class="row">
+      <!-- NOTE removed d-flex -->
+      <div v-if="vaults" class="col-12">
+        <!-- NOTE removed v-if keeps -->
+        <section class="row">
           <div class="col-2 mb-3" v-for="vault in vaults" :key="vault.id">
             <VaultCard :vaultProp="vault" />
           </div>

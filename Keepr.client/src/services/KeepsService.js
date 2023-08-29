@@ -12,6 +12,7 @@ class KeepsService {
 
   async getKeepsByVaultId(vaultId) {
     const res = await api.get(`api/vaults/${vaultId}/keeps`)
+    logger.log(res.data)
     const keeps = res.data.map(k => new Keep(k))
     AppState.keeps = keeps
   }
@@ -26,7 +27,7 @@ class KeepsService {
     const keep = new Keep(res.data)
     AppState.keeps.unshift(keep)
   }
-  async asyncremoveKeep(keepId) {
+  async removeKeep(keepId) {
     const res = await api.delete(`api/keeps/${keepId}`)
     const keepIndex = AppState.keeps.findIndex(k => k.id == keepId)
     AppState.keeps.splice(keepIndex, 1)

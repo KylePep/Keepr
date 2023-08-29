@@ -23,5 +23,10 @@ class VaultsService {
     await api.put(`api/vaults/${vaultData.id}`, vaultData)
     AppState.activeVault.isPrivate = vaultData.isPrivate
   }
+  async removeVault(vaultId) {
+    await api.delete(`api/vaults/${vaultId}`)
+    const vaultIndex = AppState.vaults.findIndex(v => v.id == vaultId)
+    AppState.vaults.splice(vaultIndex, 1)
+  }
 }
 export const vaultsService = new VaultsService()
