@@ -44,15 +44,20 @@ import Pop from "../utils/Pop.js";
 import { computed, onUnmounted, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import { keepsService } from "../services/KeepsService.js";
+import { router } from "../router.js";
 
 export default {
   setup() {
     const route = useRoute()
     async function getVaultById(vaultId) {
       try {
+        let vaultId = route.params.vaultId
         await vaultsService.getVaultById(vaultId)
       } catch (error) {
         Pop.error(error.message, '[ERROR-getVaultById]')
+        if (error.response.data.includes('⚠️')) {
+          router.push({ name: "Home" })
+        }
       }
     }
     async function getKeepsByVaultId(vaultId) {

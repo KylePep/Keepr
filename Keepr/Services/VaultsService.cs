@@ -42,7 +42,7 @@ public class VaultsService
     }
     if (vault.isPrivate == true && vault.CreatorId != userId)
     {
-      throw new Exception($"Bad vault id: {vaultId}");
+      throw new Exception($"Bad vault id: {vaultId}, ⚠️");
     }
     return vault;
   }
