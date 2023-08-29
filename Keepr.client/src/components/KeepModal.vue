@@ -11,11 +11,13 @@
             <div class="text-center">
               <i class="mdi mdi-eye"></i> {{ keep.views }} | <i class="kept">K</i> {{ keep.kept }}
             </div>
-            <div class="text-center fs-1">
-              {{ keep.name }}
-            </div>
             <div>
-              {{ keep.description }}
+              <div class="text-center fs-1 mb-3">
+                {{ keep.name }}
+              </div>
+              <div>
+                {{ keep.description }}
+              </div>
             </div>
             <div class="d-flex justify-content-between">
               <div v-if="route.name != 'Vault'">

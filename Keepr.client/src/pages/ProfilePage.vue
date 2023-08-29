@@ -3,13 +3,13 @@
     <section class="row">
       <div class="col-12 mb-3">
         <section class="row d-flex justify-content-center">
-          <div class="col-9 cover-img position-relative m-3 rounded">
+          <div class="col-9 cover-img position-relative m-3 mb-5 rounded">
             <img class="profile-avatar" :src="activeProfile.picture" :alt="activeProfile.name">
           </div>
-          <div class="ms-3 fs-4 col-9 d-flex justify-content-end" type="button" data-bs-toggle="modal"
+          <!-- <div class="ms-3 fs-4 col-9 d-flex justify-content-end" type="button" data-bs-toggle="modal"
             data-bs-target="#accountFormModal">
             <i class="mdi mdi-dots-horizontal p-0  selectable"></i>
-          </div>
+          </div> -->
         </section>
         <div class="text-center fs-3">
           {{ activeProfile.name }}
