@@ -19,9 +19,9 @@
                 {{ keep.description }}
               </div>
             </div>
-            <div class="d-flex justify-content-between">
+            <div class="d-md-flex justify-content-between">
               <div v-if="route.name != 'Vault'">
-                <form v-if="AppState.account.id" @submit.prevent="createVaultKeep()" class="form-group d-flex">
+                <form v-if="AppState.account.id" @submit.prevent="createVaultKeep()" class="form-group d-flex mb-3">
                   <label for="exampleFormControlSelect1"></label>
                   <select v-model="editable.vault" class="form-control" id="exampleFormControlSelect1">
                     <option v-for=" vault  in  vaults " :key="vault.id" :value="vault.id">{{ vault.name }}</option>
@@ -29,10 +29,6 @@
                   <button class="ms-3 btn btn-light">Save</button>
                 </form>
               </div>
-              <!-- <div @click="removeKeep()" v-if="route.name == 'Profile' || route.name == 'Account'"
-                class="selectable fs-4">
-                <i class="mdi mdi-cancel"></i> Remove Keep
-              </div> -->
               <div @click="removeVaultKeep()" v-if="route.name == 'Vault' && AppState.account.id" class="selectable fs-4">
                 <i class="mdi mdi-cancel"></i>Remove Keep From Vault
               </div>
