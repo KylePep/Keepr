@@ -2,9 +2,21 @@
   <div class="container-fluid">
     <section class="row">
       <div class="col-12 mb-3">
-        {{ activeProfile.name }}
-        <img :src="activeProfile.picture" :alt="activeProfile.name">
-        Vaults {{ vaults.length }} | Keeps {{ keeps.length }}
+        <section class="row d-flex justify-content-center">
+          <div class="col-9 cover-img position-relative m-3 rounded">
+            <img class="profile-avatar" :src="activeProfile.picture" :alt="activeProfile.name">
+          </div>
+          <div class="ms-3 fs-4 col-9 d-flex justify-content-end" type="button" data-bs-toggle="modal"
+            data-bs-target="#accountFormModal">
+            <i class="mdi mdi-dots-horizontal p-0  selectable"></i>
+          </div>
+        </section>
+        <div class="text-center fs-3">
+          {{ activeProfile.name }}
+          <p class="fs-5">
+            Vaults {{ vaults.length }} | Keeps {{ keeps.length }}
+          </p>
+        </div>
       </div>
       <!-- NOTE removed d-flex -->
       <div v-if="vaults" class="col-12">
@@ -77,7 +89,9 @@ export default {
       AppState: computed(() => AppState),
       activeProfile: computed(() => AppState.activeProfile),
       vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      coverImg: computed(() => `url("${AppState.activeProfile.coverImg}")`),
+
     };
   },
   components: { KeepCard, VaultCard }
@@ -89,5 +103,24 @@ export default {
 .masonry-with-columns {
   columns: 4 200px;
   column-gap: 1rem;
+}
+
+.cover-img {
+  height: 25vh;
+  background-position: center;
+  background-size: cover;
+  background-image: v-bind(coverImg);
+}
+
+.profile-avatar {
+  position: absolute;
+  bottom: -25%;
+  left: 43.5%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  height: 20vh;
+  min-width: 20vh;
+  max-width: 20vh;
 }
 </style>

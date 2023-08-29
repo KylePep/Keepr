@@ -31,7 +31,7 @@
                 class="selectable fs-4">
                 <i class="mdi mdi-cancel"></i> Remove Keep
               </div> -->
-              <div @click="removeVaultKeep()" v-if="route.name == 'Vault'" class="selectable fs-4">
+              <div @click="removeVaultKeep()" v-if="route.name == 'Vault' && AppState.account.id" class="selectable fs-4">
                 <i class="mdi mdi-cancel"></i>Remove Keep From Vault
               </div>
               <div v-else></div>

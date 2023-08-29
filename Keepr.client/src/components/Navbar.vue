@@ -8,7 +8,8 @@
         </div>
       </router-link>
 
-      <div class=" dropdown-toggle fs-4 ms-4" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <div v-if="Appstate.account.id" class=" dropdown-toggle fs-4 ms-4" href="#" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
         Create
       </div>
       <ul class="dropdown-menu">
@@ -43,12 +44,13 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Login from './Login.vue';
+import { AppState } from "../AppState.js";
 export default {
   setup() {
     return {
-
+      Appstate: computed(() => AppState)
     }
   },
   components: { Login }
