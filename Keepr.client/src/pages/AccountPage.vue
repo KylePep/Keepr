@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { computed, onMounted, watchEffect } from 'vue';
+import { computed, onMounted, onUnmounted, watchEffect } from 'vue';
 import { AppState } from '../AppState';
 import { useRoute } from "vue-router";
 import { accountService } from "../services/AccountService.js";
@@ -67,6 +67,10 @@ export default {
       getAccountVaults(AppState.account.id);
       getKeepsByProfileId(AppState.account.id);
     });
+    onUnmounted(() => {
+      AppState.vaults = []
+      AppState.keeps = []
+    })
     return {
       AppState: computed(() => AppState),
       activeProfile: computed(() => AppState.activeProfile),

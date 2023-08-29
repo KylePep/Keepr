@@ -28,7 +28,7 @@
 
 
 <script>
-import { computed, watchEffect } from "vue";
+import { computed, onUnmounted, watchEffect } from "vue";
 import { AppState } from "../AppState.js";
 import { useRoute } from "vue-router";
 import Pop from "../utils/Pop.js";
@@ -69,6 +69,10 @@ export default {
       getVaultsByProfileId(route.params.profileId);
       getKeepsByProfileId(route.params.profileId);
     });
+    onUnmounted(() => {
+      AppState.vaults = []
+      AppState.keeps = []
+    })
     return {
       AppState: computed(() => AppState),
       activeProfile: computed(() => AppState.activeProfile),

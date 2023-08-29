@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { computed, onMounted, watchEffect } from "vue";
+import { computed, onMounted, onUnmounted, watchEffect } from "vue";
 import Pop from "../utils/Pop.js";
 import { keepsService } from "../services/KeepsService.js"
 import { AppState } from "../AppState.js";
@@ -42,6 +42,10 @@ export default {
     watchEffect(() => {
       AppState.account.id
       getAccountVaults();
+    })
+    onUnmounted(() => {
+      AppState.vaults = []
+      AppState.keeps = []
     })
     return {
       keeps: computed(() => AppState.keeps),

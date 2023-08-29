@@ -68,6 +68,7 @@ export default {
     })
     onUnmounted(() => {
       AppState.activeVault = {}
+      AppState.keeps = []
     })
     return {
       AppState: computed(() => AppState),
