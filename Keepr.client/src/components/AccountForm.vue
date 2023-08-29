@@ -15,11 +15,11 @@
         <div class="modal-body">
           <form @submit.prevent="editAccount()">
             <input v-model="editable.name" class="form-control" type="text" name="name" id="name" placeholder="Name..."
-              required>
+              minlength="3" maxlength="255" required>
             <input v-model="editable.picture" class="form-control" type="text" name="picture" id="picture"
-              placeholder="Picture..." required>
+              placeholder="Picture..." minlength="3" maxlength="255" required>
             <input v-model="editable.coverImg" class="form-control" type="text" name="coverImg" id="icoverImg"
-              placeholder="Cover Image..." required>
+              placeholder="Cover Image..." minlength="3" maxlength="700" required>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">Update</button>
             </div>

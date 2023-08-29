@@ -22,10 +22,11 @@
         <div class="modal-body">
           <form v-if="edit == false" @submit.prevent="createVault()">
             <input v-model="editable.name" class="form-control" type="text" name="title" id="title" placeholder="Title"
-              required>
+              minlength="3" maxlength="50" required>
             <input v-model="editable.description" class="form-control" type="text" name="description" id="description"
-              placeholder="Description" required>
-            <input v-model="editable.img" class="form-control" type="text" name="url" id="url" placeholder="URL" required>
+              placeholder="Description" minlength="3" maxlength="1000" required>
+            <input v-model="editable.img" class="form-control" type="text" name="url" id="url" placeholder="URL"
+              minlength="3" maxlength="700" required>
             <div class="d-flex flex-column align-items-end">
               <p>
                 Private vaults can only be seen by you

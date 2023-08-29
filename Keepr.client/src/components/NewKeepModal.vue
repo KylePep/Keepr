@@ -15,10 +15,11 @@
         <div class="modal-body">
           <form @submit.prevent="createKeep()">
             <input v-model="editable.name" class="form-control" type="text" name="name" id="name" placeholder="Title"
-              required>
-            <input v-model="editable.img" class="form-control" type="text" name="img" id="img" placeholder="URL" required>
+              minlength="3" maxlength="50" required>
+            <input v-model="editable.img" class="form-control" type="text" name="img" id="img" placeholder="URL"
+              minlength="3" maxlength="700" required>
             <textarea v-model="editable.description" class="form-control" name="description" id="description" cols="60"
-              rows="10" required></textarea>
+              rows="10" minlength="3" maxlength="1000" required></textarea>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">Create</button>
             </div>
