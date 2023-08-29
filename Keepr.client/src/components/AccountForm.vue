@@ -18,7 +18,7 @@
               required>
             <input v-model="editable.picture" class="form-control" type="text" name="picture" id="picture"
               placeholder="Picture..." required>
-            <input v-model="editable.coverImg" class="form-control" type="text" name="coverImg" id="icoverImgmg"
+            <input v-model="editable.coverImg" class="form-control" type="text" name="coverImg" id="icoverImg"
               placeholder="Cover Image..." required>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">Update</button>
@@ -51,7 +51,6 @@ export default {
         try {
           const accountData = editable.value
           await accountService.editAccount(accountData)
-          editable.value = {}
           Modal.getOrCreateInstance('#accountFormModal').hide()
         } catch (error) {
           Pop.error(error.message, '[ERROR - editAccount]')

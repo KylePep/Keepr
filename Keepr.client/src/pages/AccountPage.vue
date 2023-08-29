@@ -6,7 +6,7 @@
           <div class="col-9 cover-img position-relative m-3 rounded">
             <img class="profile-avatar" :src="activeProfile.picture" :alt="activeProfile.name">
           </div>
-          <div @click="setEdit()" class="ms-3 fs-4 col-9 d-flex justify-content-end" type="button" data-bs-toggle="modal"
+          <div class="ms-3 fs-4 col-9 d-flex justify-content-end" type="button" data-bs-toggle="modal"
             data-bs-target="#accountFormModal">
             <i class="mdi mdi-dots-horizontal p-0  selectable"></i>
           </div>
