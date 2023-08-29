@@ -26,7 +26,7 @@
                   <select v-model="editable.vault" class="form-control" id="exampleFormControlSelect1">
                     <option v-for=" vault  in  vaults " :key="vault.id" :value="vault.id">{{ vault.name }}</option>
                   </select>
-                  <button class="ms-3 btn btn-light">Save</button>
+                  <button class="ms-3 btn btn-light" title="Save Keep to Vault">Save</button>
                 </form>
               </div>
               <div @click="removeVaultKeep()" v-if="route.name == 'Vault' && AppState.account.id" class="selectable fs-4">

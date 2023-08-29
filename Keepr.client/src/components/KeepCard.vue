@@ -6,7 +6,7 @@
         <img class="img-fluid rounded" :src="keepProp.img" :alt="keepProp.name" :title="keepProp.name">
       </div>
       <div class="keep-bar d-flex flex-grow-1 justify-content-between align-items-center px-3 py-1">
-        <p class="fs-2">
+        <p class="fs-2 fw-bold">
           {{ keepProp.name }}
         </p>
         <router-link @click="setActiveProfile()" :to="{ name: 'Profile', params: { profileId: keepProp.creator.id } }">

@@ -1,7 +1,8 @@
 <template>
   <div class="row nav-div navbar bg-light px-3 justify-content-around elevation-1">
     <div class="col-4 d-flex">
-      <router-link class="order-4 order-md-1 d-none d-md-block text-dark d-flex fs-4 " :to="{ name: 'Home' }">
+      <router-link class="order-4 order-md-1 d-none d-md-block text-dark d-flex fs-4 " :to="{ name: 'Home' }"
+        title="Home">
         <div>
           Home
         </div>
@@ -9,17 +10,18 @@
 
       <div :class="dropMenu" class=" order-2 order-md-2 ">
         <div v-if="Appstate.account.id" class=" dropdown-toggle  fs-4 ms-4" href="#" role="button"
-          data-bs-toggle="dropdown" data-display="static" aria-expanded="false">
+          data-bs-toggle="dropdown" data-display="static" aria-expanded="false" title="Create Content Forms">
           Create
         </div>
         <ul class="dropdown-menu ">
           <li>
-            <div class="ms-3 fs-4" type="button" data-bs-toggle="modal" data-bs-target="#newKeepModal">
+            <div class="ms-3 fs-4" type="button" data-bs-toggle="modal" data-bs-target="#newKeepModal" title="Keep Form">
               New Keep
             </div>
           </li>
           <li>
-            <div class="ms-3 fs-4" type="button" data-bs-toggle="modal" data-bs-target="#newVaultModal">
+            <div class="ms-3 fs-4" type="button" data-bs-toggle="modal" data-bs-target="#newVaultModal"
+              title="Vault Form">
               New Vault
             </div>
           </li>
@@ -36,7 +38,7 @@
           </router-link> -->
 
     <router-link class="order-1 order-md-3 col-4 d-flex justify-content-center fs-1 text-dark d-flex fs-4"
-      :to="{ name: 'Home' }">
+      :to="{ name: 'Home' }" title="Home">
       <div class="">Keepr </div>
     </router-link>
 

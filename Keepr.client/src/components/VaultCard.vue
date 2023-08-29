@@ -3,7 +3,7 @@
     <div class="d-flex flex-grow-1 keep-bar">
       <router-link @click="setActiveVault(), emptyKeeps()" :to="{ name: 'Vault', params: { vaultId: vaultProp.id } }">
         <div class="d-flex align-items-center text-light px-3 py-3">
-          <div class="fs-2 ">
+          <div class="fs-2 fw-bold">
             {{ vaultProp.name }}
           </div>
           <div v-if="vaultProp.isPrivate == true" class="mdi mdi-lock fs-3"></div>

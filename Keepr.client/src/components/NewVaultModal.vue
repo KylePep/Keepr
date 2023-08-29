@@ -49,7 +49,7 @@
                 <p v-if="vault.isPrivate">Private</p>
                 <p v-else>Public</p>
               </i>
-              <button type="submit" class="btn btn-primary">
+              <button type="submit" class="btn btn-primary" title="Vault Submit">
                 <p v-if="edit == false">Create Vault</p>
                 <p v-else>Edit Vault</p>
               </button>
