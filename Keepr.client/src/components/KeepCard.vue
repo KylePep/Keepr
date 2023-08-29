@@ -93,11 +93,21 @@ img {
   position: absolute;
   top: 0%;
   right: 0%;
-  display: none;
+  display: block;
 }
 
 .delete-button:hover {
   cursor: pointer;
   scale: 1.1;
+}
+
+@media screen and (min-width: 768px) {
+  .delete-button {
+    padding-right: .2em;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    display: none;
+  }
 }
 </style>
