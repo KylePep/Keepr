@@ -1,5 +1,5 @@
 <template>
-  <div class="row nav-div navbar bg-light px-3 justify-content-around elevation-1">
+  <div class="row nav-div navbar bg-light px-3 m-0 justify-content-around elevation-1">
     <div class="col-4 d-flex">
       <router-link class="order-4 order-md-1 d-none d-md-block text-dark d-flex fs-4 " :to="{ name: 'Home' }"
         title="Home">
@@ -39,7 +39,7 @@
 
     <router-link class="order-1 order-md-3 col-4 d-flex justify-content-center fs-1 text-dark d-flex fs-4"
       :to="{ name: 'Home' }" title="Home">
-      <div class="">Keepr </div>
+      <div class="fw-bold">Keepr </div>
     </router-link>
 
     <!-- LOGIN COMPONENT HERE -->
@@ -105,7 +105,7 @@ a:hover {
   position: fixed;
   bottom: 0%;
   z-index: 100;
-  width: 100vw;
+  width: 100%;
 }
 
 

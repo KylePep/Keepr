@@ -1,8 +1,8 @@
 <template>
-  <header class="container-fluid ">
+  <header class="container-fluid p-0">
     <Navbar />
   </header>
-  <main>
+  <main class="container-fluid">
     <router-view />
   </main>
   <!-- <footer class="bg-dark text-light">
