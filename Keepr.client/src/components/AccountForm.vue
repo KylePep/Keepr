@@ -16,9 +16,9 @@
           <form @submit.prevent="editAccount()">
             <input v-model="editable.name" class="form-control" type="text" name="name" id="name" placeholder="Name..."
               minlength="3" maxlength="255" required>
-            <input v-model="editable.picture" class="form-control" type="text" name="picture" id="picture"
+            <input v-model="editable.picture" class="form-control" type="url" name="picture" id="picture"
               placeholder="Picture..." minlength="3" maxlength="255" required>
-            <input v-model="editable.coverImg" class="form-control" type="text" name="coverImg" id="icoverImg"
+            <input v-model="editable.coverImg" class="form-control" type="url" name="coverImg" id="icoverImg"
               placeholder="Cover Image..." minlength="3" maxlength="700" required>
             <div class="d-flex justify-content-end">
               <button type="submit" class="btn btn-primary">Update</button>

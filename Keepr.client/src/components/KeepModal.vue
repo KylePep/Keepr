@@ -56,13 +56,23 @@ import Pop from "../utils/Pop.js";
 import { vaultKeepsService } from "../services/VaultKeepsService.js"
 import { useRoute, useRouter } from "vue-router";
 import { keepsService } from "../services/KeepsService.js";
+import { logger } from "../utils/Logger.js";
 
 export default {
   setup() {
     const route = useRoute()
     const editable = ({})
+    // function editableDefault() {
+    //   logger.log('tried to set default')
+    //   let vault = 
+    //   editable.vault = vault
+    // }
+    // onMounted(() => {
+    //   editableDefault()
+    // })
     // watchEffect(() => {
-    //   route.name
+    //   AppState.activeKeep
+    //   editableDefault()
     // })
     return {
       editable,
@@ -74,6 +84,7 @@ export default {
       closeModal() {
         Modal.getOrCreateInstance('#keepModal').hide()
       },
+
       async createVaultKeep() {
         try {
           const vaultKeepData = {}

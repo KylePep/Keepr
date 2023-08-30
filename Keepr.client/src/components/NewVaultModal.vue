@@ -25,7 +25,7 @@
               minlength="3" maxlength="50" required>
             <input v-model="editable.description" class="form-control" type="text" name="description" id="description"
               placeholder="Description" minlength="3" maxlength="1000" required>
-            <input v-model="editable.img" class="form-control" type="text" name="url" id="url" placeholder="URL"
+            <input v-model="editable.img" class="form-control" type="url" name="url" id="url" placeholder="URL"
               minlength="3" maxlength="700" required>
             <div class="d-flex flex-column align-items-end">
               <p>
